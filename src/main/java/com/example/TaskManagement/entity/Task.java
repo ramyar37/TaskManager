@@ -1,6 +1,7 @@
 package com.example.TaskManagement.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -33,8 +34,9 @@ public class Task {
     @JoinColumn(name = "project_id")
     private Project project;
 
-
+    @NotNull
     private Date dueDate;
+
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
