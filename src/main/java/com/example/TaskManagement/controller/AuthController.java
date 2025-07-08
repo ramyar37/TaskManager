@@ -1,9 +1,9 @@
 package com.example.TaskManagement.controller;
 
 import com.example.TaskManagement.entity.LoginRequest;
+import com.example.TaskManagement.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
+
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
 
     @PostMapping("/login")
@@ -34,7 +38,8 @@ public class AuthController {
 
 
             if(authentication.isAuthenticated()){
-                return ResponseEntity.ok("Login successful..");
+                String token = jwtUtil.generateToken(request.getEmail());
+                return ResponseEntity.ok(token);
             }else{
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials..");
             }
