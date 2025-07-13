@@ -2,6 +2,7 @@ package com.example.TaskManagement.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -30,13 +31,10 @@ public class User {
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    public String getRefreshToken() {
-        return refreshToken;
-    }
+    @Column(name = "refresh_token_expiry")
+    private Date refreshTokenExpiry;
 
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
+
 
     public Long getId() {
         return id;
@@ -92,5 +90,22 @@ public class User {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+
+    public Date getRefreshTokenExpiry() {
+        return refreshTokenExpiry;
+    }
+
+    public void setRefreshTokenExpiry(Date refreshTokenExpiry) {
+        this.refreshTokenExpiry = refreshTokenExpiry;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }
